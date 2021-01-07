@@ -1,0 +1,16 @@
+{
+  "Authors": "TopoStats Developers",
+  "Coding Language": "Python",
+  "Documentation": null,
+  "Download Page": null,
+  "Homepage": null,
+  "License": "LGPL",
+  "Name": "TopoStats",
+  "Operating System": [
+    "Windows",
+    "Linux",
+    "macOS"
+  ],
+  "Pricing Model": null,
+  "Repository": true
+}

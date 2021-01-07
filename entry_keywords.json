@@ -1,0 +1,42 @@
+[
+  {
+    "name":"Authors",
+    "type":"str"
+  },
+  {
+    "name":"Coding Language",
+    "type":"str"
+  },
+  {
+    "name":"Documentation",
+    "type":"url"
+  },
+  {
+    "name":"Download Page",
+    "type":"url"
+  },
+  {
+    "name":"Homepage",
+    "type":"url"
+  },
+  {
+    "name":"License",
+    "type":"str"
+  },
+  {
+    "name":"Name",
+    "type":"str"
+  },
+  {
+    "name":"Operating System",
+    "type":"list"
+  },
+  {
+    "name":"Pricing Model",
+    "type":"str"
+  },
+  {
+    "name":"Repository",
+    "type":"url"
+  }
+]
