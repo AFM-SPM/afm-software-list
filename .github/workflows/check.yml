@@ -1,0 +1,30 @@
+name: Checks
+
+on:
+  push:
+  pull_request:
+  schedule:
+  - cron: "0 0 * * *"
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - name: Install dependencies
+      run: |
+        # prerequisites
+        python -m pip install --upgrade pip wheel
+        pip install -r requirements.txt
+        # show installed packages
+        pip freeze
+    - name: Check all entries
+      run: |
+        python afm-list-manager check-entries
+
