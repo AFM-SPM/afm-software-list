@@ -21,13 +21,23 @@ def add_entry():
     for item in data:
         name = item["name"]
         dtype = item["type"]
-        promptkwds = {
-            "text": name,
-            "default": "",
-            "type": KEYWORD_TYPES[dtype]}
-        value = click.prompt(**promptkwds)
-        if value == "":
-            value = None
+        if name == "Operating System":
+            # Special confirmation questions for operating systems
+            value = []
+            for ops in ["Windows", "macOS", "Linux"]:
+                sup = click.confirm(
+                    "Does this software support {}?".format(ops))
+                if sup:
+                    value.append(ops)
+        else:
+            # Standard prompt
+            promptkwds = {
+                "text": name,
+                "default": "",
+                "type": KEYWORD_TYPES[dtype]}
+            value = click.prompt(**promptkwds)
+            if value == "":
+                value = None
         entry[name] = value
     # save the entry
     fname = slugify(entry["Name"]) + ".json"
