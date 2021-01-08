@@ -1,0 +1,17 @@
+{
+  "Authors": "Paul Müller",
+  "Coding Language": "Python",
+  "Description": "Python library for reading common AFM file formats",
+  "Documentation": "https://afmformats.readthedocs.io",
+  "Download Page": "https://pypi.org/project/afmformats",
+  "Homepage": null,
+  "License": "MIT",
+  "Name": "afmformats",
+  "Operating System": [
+    "Windows",
+    "macOS",
+    "Linux"
+  ],
+  "Pricing Model": null,
+  "Repository": "https://github.com/AFM-analysis/afmformats"
+}
