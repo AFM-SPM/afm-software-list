@@ -2,7 +2,8 @@ AFM software list
 =================
 |Check Status|
 
-This repository is used for managing the AFM software list.
+This repository is used for managing the
+`AFM software list <https://afm-spm.github.io/afm-software-list/>`_.
 
 
 Contributing
