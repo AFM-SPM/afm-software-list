@@ -1,11 +1,23 @@
 [
   {
+    "name":"Name",
+    "type":"str"
+  },
+  {
+    "name":"Description",
+    "type":"str"
+  },
+  {
     "name":"Authors",
     "type":"str"
   },
   {
-    "name":"Coding Language",
-    "type":"str"
+    "name":"Repository",
+    "type":"url"
+  },
+  {
+    "name":"Homepage",
+    "type":"url"
   },
   {
     "name":"Documentation",
@@ -16,15 +28,11 @@
     "type":"url"
   },
   {
-    "name":"Homepage",
-    "type":"url"
-  },
-  {
-    "name":"License",
+    "name":"Coding Language",
     "type":"str"
   },
   {
-    "name":"Name",
+    "name":"License",
     "type":"str"
   },
   {
@@ -34,9 +42,5 @@
   {
     "name":"Pricing Model",
     "type":"str"
-  },
-  {
-    "name":"Repository",
-    "type":"url"
   }
 ]

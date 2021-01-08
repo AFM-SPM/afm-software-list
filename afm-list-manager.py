@@ -50,7 +50,7 @@ def add_keyword():
     data.append({"name": name,
                  "type": dtype})
     with KEYWORD_FILE.open("w") as fd:
-        json.dump(sorted(data, key=lambda x: x["name"]), fd, indent=2)
+        json.dump(data, fd, indent=2)
 
 
 @click.command()
