@@ -52,6 +52,7 @@ def add_keyword():
     with KEYWORD_FILE.open("w") as fd:
         json.dump(data, fd, indent=2)
     generate_issue_template()
+    recreate_json_entries()
 
 
 @click.command()
@@ -94,6 +95,7 @@ def check_entries():
 def run_maintenance():
     """Run automated maintenance tasks"""
     generate_issue_template()
+    recreate_json_entries()
 
 
 def generate_issue_template():
@@ -112,6 +114,26 @@ def generate_issue_template():
     [lines.append(dd) for dd in dumped.split("\n")]
     lines.append("```")
     tpath.write_text("\n".join(lines))
+
+
+def recreate_json_entries():
+    """Rcreate all json entries
+
+    This is used for fixing manual formatting errors or when new
+    keys are added.
+    """
+    with KEYWORD_FILE.open() as fd:
+        data = json.load(fd)
+    for path in ENTRY_DIR.glob("*.json"):
+        with path.open() as fd:
+            entry = json.load(fd)
+        # insert new columns
+        for item in data:
+            if item["name"] not in entry:
+                entry[item["name"]] = None
+        # save entry
+        with path.open("w") as fd:
+            json.dump(entry, fd, sort_keys=True, indent=2, ensure_ascii=False)
 
 
 def verify_url(url):
