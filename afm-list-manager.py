@@ -51,6 +51,7 @@ def add_keyword():
                  "type": dtype})
     with KEYWORD_FILE.open("w") as fd:
         json.dump(data, fd, indent=2)
+    generate_issue_template()
 
 
 @click.command()
@@ -89,9 +90,28 @@ def check_entries():
     click.secho("Success.", bold=True, fg="green")
 
 
+@click.command()
+def run_maintenance():
+    """Run automated maintenance tasks"""
+    generate_issue_template()
+
+
 def generate_issue_template():
     """Generate the GitHub issue template for new software entries"""
-    pass
+    tdir = pathlib.Path(__file__).parent / ".github" / "ISSUE_TEMPLATE"
+    tpath = tdir / "new-software-list-entry.md"
+    lines = tpath.read_text().split("\n")[:11]
+    lines.append("```json")
+    # Add template
+    with KEYWORD_FILE.open() as fd:
+        data = json.load(fd)
+    template = {}
+    for item in data:
+        template[item["name"]] = None
+    dumped = json.dumps(template, indent=2)
+    [lines.append(dd) for dd in dumped.split("\n")]
+    lines.append("```")
+    tpath.write_text("\n".join(lines))
 
 
 def verify_url(url):
@@ -120,6 +140,7 @@ KEYWORD_VALIDATORS = {
 cli.add_command(add_entry)
 cli.add_command(add_keyword)
 cli.add_command(check_entries)
+cli.add_command(run_maintenance)
 
 
 if __name__ == "__main__":
