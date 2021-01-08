@@ -108,6 +108,34 @@ def run_maintenance():
     recreate_json_entries()
 
 
+@click.command()
+def generate_list():
+    """Generate the software list from all entries"""
+    # This directory is not under version control.
+    # It is renamed to "docs" and served via the gh-pages branch
+    # (This process is automated using GitHub Actions).
+    dout = pathlib.Path(__file__).parent / "docs-build"
+    dout.mkdir(exist_ok=True)
+    # parameters
+    header = [item["name"] for item in json.load(KEYWORD_FILE.open())]
+    entries = [json.load(pp.open()) for pp in sorted(ENTRY_DIR.glob("*.json"))]
+    # create .csv list
+    with (dout / "afm-software.csv").open("w") as fd:
+        # header
+        fd.write(", ".join(header) + "\r\n")
+        # entries
+        for ent in entries:
+            values = []
+            for key in header:
+                value = ent[key]
+                if value is None:
+                    value = ""
+                elif isinstance(value, list):
+                    value = " ".join(value)
+                values.append(value)
+            fd.write(", ".join(values) + "\r\n")
+
+
 def generate_issue_template():
     """Generate the GitHub issue template for new software entries"""
     tdir = pathlib.Path(__file__).parent / ".github" / "ISSUE_TEMPLATE"
@@ -172,6 +200,7 @@ KEYWORD_VALIDATORS = {
 cli.add_command(add_entry)
 cli.add_command(add_keyword)
 cli.add_command(check_entries)
+cli.add_command(generate_list)
 cli.add_command(run_maintenance)
 
 
