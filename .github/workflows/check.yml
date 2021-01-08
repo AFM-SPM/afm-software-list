@@ -26,5 +26,5 @@ jobs:
         pip freeze
     - name: Check all entries
       run: |
-        python afm-list-manager check-entries
+        python afm-list-manager.py check-entries
 
