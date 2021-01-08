@@ -1,0 +1,17 @@
+{
+  "Authors": "Paul Müller",
+  "Coding Language": "Python",
+  "Description": "GUI for AFM data analysis with an emphasis on biological specimens",
+  "Documentation": "https://pyjibe.readthedocs.io",
+  "Download Page": "https://github.com/AFM-analysis/PyJibe/releases",
+  "Homepage": null,
+  "License": "GPL",
+  "Name": "PyJibe",
+  "Operating System": [
+    "Windows",
+    "Linux",
+    "macOS"
+  ],
+  "Pricing Model": null,
+  "Repository": "https://github.com/AFM-analysis/PyJibe"
+}
