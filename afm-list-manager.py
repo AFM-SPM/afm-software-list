@@ -79,10 +79,14 @@ def check_entries():
         click.secho(err, bold=True, fg="red", err=True)
 
     if errors:
+        click.secho("There were errors.", bold=True, fg="red")
         sys.exit(1)
 
     if warnings:
+        click.secho("There were warnings.", bold=True, fg="yellow")
         sys.exit(2)
+
+    click.secho("Success.", bold=True, fg="green")
 
 
 def generate_issue_template():
