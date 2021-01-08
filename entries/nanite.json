@@ -1,0 +1,17 @@
+{
+  "Authors": "Paul Müller",
+  "Coding Language": "Python",
+  "Description": "Fitting and machine-learning based rating of AFM force-indentation data",
+  "Documentation": "https://nanite.readthedocs.io",
+  "Download Page": "https://pypi.org/project/nanite",
+  "Homepage": null,
+  "License": "GPL",
+  "Name": "nanite",
+  "Operating System": [
+    "Windows",
+    "macOS",
+    "Linux"
+  ],
+  "Pricing Model": null,
+  "Repository": "https://github.com/AFM-analysis/nanite"
+}
