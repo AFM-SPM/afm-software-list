@@ -1,5 +1,6 @@
 import json
 import pathlib
+import sys
 
 import click
 import requests
@@ -14,24 +15,23 @@ def cli():
 @click.command()
 def add_entry():
     """Add a new entry to the software list"""
-    with open(KEYWORD_FILE) as fd:
+    with KEYWORD_FILE.open() as fd:
         data = json.load(fd)
     entry = {}
     for item in data:
         name = item["name"]
         dtype = item["type"]
-        promptkwds = {"text": name, "default": ""}
-        if item["type"] in KEYWORD_VALIDATORS:
-            promptkwds["value_proc"] = KEYWORD_VALIDATORS[dtype]
-        else:
-            promptkwds["type"] = KEYWORD_TYPES[dtype]
+        promptkwds = {
+            "text": name,
+            "default": "",
+            "type": KEYWORD_TYPES[dtype]}
         value = click.prompt(**promptkwds)
         if value == "":
             value = None
         entry[name] = value
     # save the entry
     fname = slugify(entry["Name"]) + ".json"
-    path = pathlib.Path(__file__).parent / "entries" / fname
+    path = ENTRY_DIR / fname
     if path.exists():
         raise ValueError("Entry already exists: {}".format(fname))
     with path.open("w") as fd:
@@ -45,12 +45,44 @@ def add_keyword():
     dtype = click.prompt(text='Please enter the data type',
                          default="str",
                          type=click.Choice(sorted(KEYWORD_TYPES.keys())))
-    with open(KEYWORD_FILE) as fd:
+    with KEYWORD_FILE.open() as fd:
         data = json.load(fd)
     data.append({"name": name,
                  "type": dtype})
-    with open(KEYWORD_FILE, "w") as fd:
+    with KEYWORD_FILE.open("w") as fd:
         json.dump(sorted(data, key=lambda x: x["name"]), fd, indent=2)
+
+
+@click.command()
+def check_entries():
+    """Perform sanity checks for all list entries"""
+    with KEYWORD_FILE.open() as fd:
+        kwdata = json.load(fd)
+    click.secho("Checking entries...", bold=True)
+    warnings = []
+    errors = []
+    with click.progressbar(sorted(ENTRY_DIR.glob("*.json"))) as bar:
+        for path in bar:
+            with path.open() as fd:
+                data = json.load(fd)
+            for item in kwdata:
+                name = item["name"]
+                if item["type"] == "url" and data[name] is not None:
+                    try:
+                        valid = verify_url(data[name])
+                    except BaseException:
+                        valid = False
+                    if not valid:
+                        errors.append("URL broken for '{}': '{}' ({})".format(
+                            path.name, item["name"], data[name]))
+    for err in errors:
+        click.secho(err, bold=True, fg="red", err=True)
+
+    if errors:
+        sys.exit(1)
+
+    if warnings:
+        sys.exit(2)
 
 
 def generate_issue_template():
@@ -64,7 +96,9 @@ def verify_url(url):
     return request.status_code == 200
 
 
-KEYWORD_FILE = "entry_keywords.json"
+ENTRY_DIR = pathlib.Path(__file__).parent / "entries"
+
+KEYWORD_FILE = pathlib.Path(__file__).parent / "entry_keywords.json"
 
 KEYWORD_TYPES = {
     "float": float,
@@ -81,6 +115,7 @@ KEYWORD_VALIDATORS = {
 
 cli.add_command(add_entry)
 cli.add_command(add_keyword)
+cli.add_command(check_entries)
 
 
 if __name__ == "__main__":

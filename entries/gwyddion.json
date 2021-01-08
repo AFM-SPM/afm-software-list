@@ -1,9 +1,9 @@
 {
   "Authors": "David Nečas and Petr Klapetek",
   "Coding Language": "C",
-  "Documentation": true,
-  "Download Page": true,
-  "Homepage": true,
+  "Documentation": "http://gwyddion.net/documentation/",
+  "Download Page": "http://gwyddion.net/download.php",
+  "Homepage": "http://gwyddion.net/",
   "License": "GPL",
   "Name": "Gwyddion",
   "Operating System": [
@@ -12,5 +12,5 @@
     "macOS"
   ],
   "Pricing Model": null,
-  "Repository": true
+  "Repository": "https://sourceforge.net/projects/gwyddion/"
 }
