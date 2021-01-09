@@ -37,5 +37,5 @@ jobs:
         git checkout gh-pages
         mv ./docs-build/* docs/static/
         git add docs/static/*
-        git commit -a -m "automated update of software list"
+        git commit -a -m "automated update of software list" || echo "No changes to commit"
         git push
