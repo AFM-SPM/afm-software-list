@@ -1,6 +1,6 @@
 AFM software list
 =================
-|Check Status|
+|Check Status| |Build Status|
 
 This repository is used for managing the
 `AFM software list <https://afm-spm.github.io/afm-software-list/>`_.
@@ -41,5 +41,8 @@ To see a list of available commands and options, run
     python afm-list-manager.py --help
 
 
-.. |Check Status| image:: https://img.shields.io/github/workflow/status/AFM-SPM/afm-software-list/Checks?label=List-Checks
+.. |Check Status| image:: https://img.shields.io/github/workflow/status/AFM-SPM/afm-software-list/Check%20list%20entries?label=List-Checks
    :target: https://github.com/AFM-SPM/afm-software-list/actions?query=workflow%3A%22Check+list+entries%22
+
+.. |Build Status| image:: https://img.shields.io/github/workflow/status/AFM-SPM/afm-software-list/Publish%20software%20list%20to%20gh-pages?label=HTML-build
+   :target: https://github.com/AFM-SPM/afm-software-list/actions?query=workflow%3A%22Publish+software+list+to+gh-pages%22
