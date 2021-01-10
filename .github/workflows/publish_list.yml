@@ -2,7 +2,9 @@ name: Publish software list to gh-pages
 
 on:
   push:
-    branches: [ main ]
+    branches:
+    - main
+    - gh-pages
   schedule:
   - cron: "0 0 * * *"
 
