@@ -8,9 +8,9 @@
   "License": "GPL",
   "Name": "PyJibe",
   "Operating System": [
-    "Windows",
     "Linux",
-    "macOS"
+    "macOS",
+    "Windows"
   ],
   "Pricing Model": null,
   "Repository": "https://github.com/AFM-analysis/PyJibe"
