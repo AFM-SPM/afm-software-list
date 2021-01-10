@@ -5,4 +5,4 @@
 layout: home
 ---
 
-{% include_relative static/afm-software.csv %}
+{% include_relative static/afm-software.html %}
