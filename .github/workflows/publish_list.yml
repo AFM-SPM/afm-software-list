@@ -26,7 +26,7 @@ jobs:
         pip freeze
     - name: Generate software list
       run: |
-        python afm-list-manager.py generate-list
+        python afm-list-manager.py export-list -o exported
     - name: Push to gh-pages branch
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -35,7 +35,7 @@ jobs:
         git config --global user.email "bot@github.com"
         git config --global user.name "gh-pages release bot"
         git checkout gh-pages
-        mv ./docs-build/* docs/static/
+        mv ./exported/* docs/static/
         git add docs/static/*
         git commit -a -m "automated update of software list" || echo "No changes to commit"
         git push

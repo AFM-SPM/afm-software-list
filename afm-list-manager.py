@@ -109,20 +109,29 @@ def run_maintenance():
 
 
 @click.command()
-def generate_list():
+@click.option("-o", "--output-dir")
+def export_list(output_dir):
     """Generate the software list from all entries"""
     # This directory is not under version control.
     # It is renamed to "docs" and served via the gh-pages branch
     # (This process is automated using GitHub Actions).
-    dout = pathlib.Path(__file__).parent / "docs-build"
+    dout = pathlib.Path(output_dir)
     dout.mkdir(exist_ok=True)
+    # create .csv list
+    export_to_csv(dout / "afm-software.csv", delimiter=", ")
+    # create .tsv list
+    export_to_csv(dout / "afm-software.tsv", delimiter="\t")
+    # create .html list
+    export_to_html(dout / "afm-software.html")
+
+
+def export_to_csv(path, delimiter=", "):
     # parameters
     header = [item["name"] for item in json.load(KEYWORD_FILE.open())]
     entries = [json.load(pp.open()) for pp in sorted(ENTRY_DIR.glob("*.json"))]
-    # create .csv list
-    with (dout / "afm-software.csv").open("w") as fd:
+    with path.open("w") as fd:
         # header
-        fd.write(", ".join(header) + "\r\n")
+        fd.write(delimiter.join(header) + "\r\n")
         # entries
         for ent in entries:
             values = []
@@ -133,7 +142,39 @@ def generate_list():
                 elif isinstance(value, list):
                     value = " ".join(value)
                 values.append(value)
-            fd.write(", ".join(values) + "\r\n")
+            fd.write(delimiter.join(values) + "\r\n")
+
+
+def export_to_html(path, table_id="afmlist-table", tr_class="afmlist-header"):
+    # parameters
+    header = [item["name"] for item in json.load(KEYWORD_FILE.open())]
+    entries = [json.load(pp.open()) for pp in sorted(ENTRY_DIR.glob("*.json"))]
+    with KEYWORD_FILE.open() as fd:
+        kwdata = json.load(fd)
+    lines = []
+    lines.append('<table id="{}">'.format(table_id))
+    # header
+    lines.append('<tr class="{}">'.format(tr_class))
+    for hh in header:
+        lines.append("<th> {} </th>".format(hh))
+    lines.append('</tr>')
+    # entries
+    for ent in entries:
+        lines.append("<tr>")
+        for item in kwdata:
+            name = item["name"]
+            dtype = item["type"]
+            value = ent[name]
+            if value is None:
+                value = ""
+            elif isinstance(value, list):
+                value = " ".join(value)
+            elif dtype == "url":
+                value = '<a href="{URL}">{URL}</a>'.format(URL=value)
+            lines.append("<td> {} </td>".format(value))
+        lines.append("</tr>")
+    lines.append('</table>')
+    path.write_text("\r\n".join(lines))
 
 
 def generate_issue_template():
@@ -200,7 +241,7 @@ KEYWORD_VALIDATORS = {
 cli.add_command(add_entry)
 cli.add_command(add_keyword)
 cli.add_command(check_entries)
-cli.add_command(generate_list)
+cli.add_command(export_list)
 cli.add_command(run_maintenance)
 
 
