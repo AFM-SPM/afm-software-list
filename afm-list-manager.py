@@ -203,7 +203,9 @@ def export_to_html(path, table_id="afmlist-table", tr_class="afmlist-header",
                     if favicon is None:
                         icon = "🌐"
                     else:
-                        icon = '<img src="{}" style="height:1em;">'.format(
+                        # The "static/" part is required for it to work with
+                        # jekyll.
+                        icon = '<img src="static/{}" style="height:1em;">'.format(
                             favicon.relative_to(path.parent))
                 else:
                     icon = value
