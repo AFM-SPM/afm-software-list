@@ -127,6 +127,9 @@ def export_list(output_dir):
     export_to_html(dout / "afm-software.html", icons=False)
     # create .html list with icons
     export_to_html(dout / "afm-software-wicons.html", icons=True)
+    # create .html list with icons for jekyll
+    export_to_html(dout / "afm-software-wicons-jekyll.html", icons=True,
+                   jekyll=True)
 
 
 def export_to_csv(path, delimiter=", "):
@@ -150,7 +153,7 @@ def export_to_csv(path, delimiter=", "):
 
 
 def export_to_html(path, table_id="afmlist-table", tr_class="afmlist-header",
-                   icons=False):
+                   icons=False, jekyll=False):
     # parameters
     header = [item["name"] for item in json.load(KEYWORD_FILE.open())]
     entries = [json.load(pp.open()) for pp in sorted(ENTRY_DIR.glob("*.json"))]
@@ -203,10 +206,11 @@ def export_to_html(path, table_id="afmlist-table", tr_class="afmlist-header",
                     if favicon is None:
                         icon = "🌐"
                     else:
-                        # The "static/" part is required for it to work with
-                        # jekyll.
-                        icon = '<img src="static/{}" style="height:1em;">'.format(
-                            favicon.relative_to(path.parent))
+                        ip = favicon.relative_to(path.parent)
+                        if jekyll:
+                            # the file is included on the top level
+                            ip = "static/{}".format(ip)
+                        icon = '<img src="{}" style="height:1em;">'.format(ip)
                 else:
                     icon = value
                 value = '<a href="{}" title="{} of {}">{}</a>'.format(
