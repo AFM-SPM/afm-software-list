@@ -208,7 +208,8 @@ def export_to_html(path, table_id="afmlist-table", tr_class="afmlist-header",
                     else:
                         ip = favicon.relative_to(path.parent)
                         if jekyll:
-                            # the file is included on the top level
+                            # Since with jekyll, the file is included at
+                            # the top level, we have to prepend "static".
                             ip = "static/{}".format(ip)
                         icon = '<img src="{}" style="height:1em;">'.format(ip)
                 else:
