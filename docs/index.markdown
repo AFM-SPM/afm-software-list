@@ -5,4 +5,4 @@
 layout: home
 ---
 
-{% include_relative static/afm-software-wicons.html %}
+{% include_relative static/afm-software-wicons-jekyll.html %}
