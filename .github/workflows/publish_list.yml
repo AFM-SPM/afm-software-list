@@ -37,7 +37,7 @@ jobs:
         git config --global user.email "bot@github.com"
         git config --global user.name "gh-pages release bot"
         git checkout gh-pages
-        mv ./exported/* docs/static/
+        cp -r ./exported/* docs/static/
         git add docs/static/*
         git commit -a -m "automated update of software list" || echo "No changes to commit"
         git push
