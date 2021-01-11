@@ -8,9 +8,9 @@
   "License": "GPL",
   "Name": "nanite",
   "Operating System": [
+    "Linux",
     "Windows",
-    "macOS",
-    "Linux"
+    "macOS"
   ],
   "Pricing Model": null,
   "Repository": "https://github.com/AFM-analysis/nanite"

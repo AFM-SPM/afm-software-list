@@ -265,8 +265,11 @@ def recreate_json_entries():
             entry = json.load(fd)
         # insert new columns
         for item in data:
-            if item["name"] not in entry:
-                entry[item["name"]] = None
+            name = item["name"]
+            if name not in entry:
+                entry[name] = None
+            if name == "Operating System" and entry[name]:
+                entry[name] = sorted(entry[name])
         # save entry
         with path.open("w") as fd:
             json.dump(entry, fd, sort_keys=True, indent=2, ensure_ascii=False)

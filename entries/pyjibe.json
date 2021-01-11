@@ -9,8 +9,8 @@
   "Name": "PyJibe",
   "Operating System": [
     "Linux",
-    "macOS",
-    "Windows"
+    "Windows",
+    "macOS"
   ],
   "Pricing Model": null,
   "Repository": "https://github.com/AFM-analysis/PyJibe"

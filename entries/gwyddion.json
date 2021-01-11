@@ -8,8 +8,8 @@
   "License": "GPL",
   "Name": "Gwyddion",
   "Operating System": [
-    "Windows",
     "Linux",
+    "Windows",
     "macOS"
   ],
   "Pricing Model": null,

@@ -8,8 +8,8 @@
   "License": "LGPL",
   "Name": "TopoStats",
   "Operating System": [
-    "Windows",
     "Linux",
+    "Windows",
     "macOS"
   ],
   "Pricing Model": null,
