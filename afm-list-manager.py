@@ -1,6 +1,8 @@
+from functools import lru_cache
 import json
 import pathlib
 import sys
+from urllib.parse import urlparse
 
 import click
 import requests
@@ -122,7 +124,9 @@ def export_list(output_dir):
     # create .tsv list
     export_to_csv(dout / "afm-software.tsv", delimiter="\t")
     # create .html list
-    export_to_html(dout / "afm-software.html")
+    export_to_html(dout / "afm-software.html", icons=False)
+    # create .html list with icons
+    export_to_html(dout / "afm-software-wicons.html", icons=True)
 
 
 def export_to_csv(path, delimiter=", "):
@@ -145,7 +149,8 @@ def export_to_csv(path, delimiter=", "):
             fd.write(delimiter.join(values) + "\r\n")
 
 
-def export_to_html(path, table_id="afmlist-table", tr_class="afmlist-header"):
+def export_to_html(path, table_id="afmlist-table", tr_class="afmlist-header",
+                   icons=False):
     # parameters
     header = [item["name"] for item in json.load(KEYWORD_FILE.open())]
     entries = [json.load(pp.open()) for pp in sorted(ENTRY_DIR.glob("*.json"))]
@@ -156,6 +161,20 @@ def export_to_html(path, table_id="afmlist-table", tr_class="afmlist-header"):
     # header
     lines.append('<tr class="{}">'.format(tr_class))
     for hh in header:
+        if icons:
+            if hh == "Homepage":
+                hicon = "🏡"
+            elif hh == "Repository":
+                hicon = "🖧"
+            elif hh == "Download Page":
+                hicon = "⏬"
+            elif hh == "Documentation":
+                hicon = "👓"
+            elif hh == "Operating System":
+                hicon = "OS"
+            else:
+                hicon = hh
+            hh = '<span title="{}">{}</span>'.format(hh, hicon)
         lines.append("<th> {} </th>".format(hh))
     lines.append('</tr>')
     # entries
@@ -169,12 +188,50 @@ def export_to_html(path, table_id="afmlist-table", tr_class="afmlist-header"):
                 value = ""
             elif isinstance(value, list):
                 value = " ".join(value)
+                if icons:
+                    if name == "Operating System":
+                        value = value.replace("macOS",
+                                              '<span title="macOS">⌘</span>')
+                        value = value.replace("Windows",
+                                              '<span title="Windows">❖</span>')
+                        value = value.replace("Linux",
+                                              '<span title="Linux">🐧</span>')
+
             elif dtype == "url":
-                value = '<a href="{URL}">{URL}</a>'.format(URL=value)
+                if icons:
+                    favicon = download_favicon(value, path.parent / "favicons")
+                    if favicon is None:
+                        icon = "🌐"
+                    else:
+                        icon = '<img src="{}" style="height:1em;">'.format(
+                            favicon.relative_to(path.parent))
+                else:
+                    icon = value
+                value = '<a href="{}" title="{} of {}">{}</a>'.format(
+                    value, name, ent["Name"], icon)
             lines.append("<td> {} </td>".format(value))
         lines.append("</tr>")
     lines.append('</table>')
     path.write_text("\r\n".join(lines))
+
+
+@lru_cache(maxsize=500)
+def download_favicon(url, download_dir):
+    """Extract the domain from a URL and store the favicon on disk"""
+    download_dir = pathlib.Path(download_dir)
+    download_dir.mkdir(parents=True, exist_ok=True)
+    # get URL
+    parsed_uri = urlparse(url)
+    domain = '{uri.scheme}://{uri.netloc}/'.format(uri=parsed_uri)
+    # get favicon
+    resp = requests.get(domain + "/favicon.ico")
+    if resp.status_code == 200:
+        path = download_dir / (parsed_uri.netloc + ".ico")
+        with path.open("wb") as fd:
+            fd.write(resp.content)
+        return path
+    else:
+        return None
 
 
 def generate_issue_template():
