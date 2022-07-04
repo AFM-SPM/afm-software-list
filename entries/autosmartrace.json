@@ -1,0 +1,13 @@
+{
+  "Authors": "Mathew Schneider, Naghmeh Rezaei, Nancy Forde",
+  "Coding Language": "MatLab",
+  "Description": "For automated tracing of chains in AFM images or any bright chain-like objects on dark background with or without noise.",
+  "Documentation": "https://github.com/FordeLab/AutoSmarTrace/blob/main/README.txt",
+  "Download Page": null,
+  "Homepage": null,
+  "License": null,
+  "Name": "AutoSmarTrace",
+  "Operating System": null,
+  "Pricing Model": null,
+  "Repository": "https://github.com/FordeLab/AutoSmarTrace"
+}
