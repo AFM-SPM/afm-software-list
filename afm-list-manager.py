@@ -75,20 +75,21 @@ def check_entries():
     click.secho("Checking entries...", bold=True)
     warnings = []
     errors = []
-    with click.progressbar(sorted(ENTRY_DIR.glob("*.json"))) as bar:
-        for path in bar:
-            with path.open() as fd:
-                data = json.load(fd)
-            for item in kwdata:
-                name = item["name"]
-                if item["type"] == "url" and data[name] is not None:
-                    try:
-                        valid = verify_url(data[name])
-                    except BaseException:
-                        valid = False
-                    if not valid:
-                        errors.append("URL broken for '{}': '{}' ({})".format(
-                            path.name, item["name"], data[name]))
+    files = sorted(ENTRY_DIR.glob("*.json"))
+    for path in files:
+        print(f"Checking {path.name}...")
+        with path.open() as fd:
+            data = json.load(fd)
+        for item in kwdata:
+            name = item["name"]
+            if item["type"] == "url" and data[name] is not None:
+                try:
+                    valid = verify_url(data[name])
+                except BaseException:
+                    valid = False
+                if not valid:
+                    errors.append("URL broken for '{}': '{}' ({})".format(
+                        path.name, item["name"], data[name]))
     for err in errors:
         click.secho(err, bold=True, fg="red", err=True)
 
