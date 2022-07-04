@@ -1,0 +1,13 @@
+{
+  "Authors": "Naghmeh Rezaei, Nancy Forde",
+  "Coding Language": "MatLab",
+  "Description": "Chain tracing program developed to extract persistence lengths from AFM images of filaments such as collagen and DNA. Can be used on any type of image with bright chain-like structures on a darker background.",
+  "Documentation": "https://github.com/FordeLab/SmarTrace/blob/main/README.md",
+  "Download Page": null,
+  "Homepage": null,
+  "License": null,
+  "Name": "SmarTrace",
+  "Operating System": null,
+  "Pricing Model": null,
+  "Repository": "https://github.com/FordeLab/SmarTrace"
+}
