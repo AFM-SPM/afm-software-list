@@ -3,10 +3,7 @@
   "Coding Language": "Python",
   "Description": "An AFM image analysis program to batch process data by removing artefacts, identifying objects, and obtaining and plotting their statistics.",
   "Documentation":"https://afm-spm.github.io/TopoStats/" ,
-  "Download Page": [
-    "https://pypi.org/project/topostats/",
-    "https://github.com/AFM-SPM/TopoStats/releases/"
-  ],
+  "Download Page": "https://pypi.org/project/topostats/",
   "Homepage": "https://afm-spm.github.io/TopoStats/",
   "License": "LGPL",
   "Name": "TopoStats",
