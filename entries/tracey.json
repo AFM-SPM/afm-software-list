@@ -1,0 +1,16 @@
+{
+  "Authors": "Wei-Feng Xue",
+  "Coding Language": "Matlab",
+  "Description": "Tracing filament polymers and individual filament 3D structural analysis algorithms.",
+  "Documentation": "https://github.com/wfxue/Trace_y/blob/main/README.md",
+  "Download Page": "http://github.com/wfxue/Trace_y",
+  "Homepage": "http://github.com/wfxue/Trace_y",
+  "License": "MIT",
+  "Name": "Trace_y",
+  "Operating System": [
+    "Windows",
+    "macOS"
+  ],
+  "Pricing Model": null,
+  "Repository": "http://github.com/wfxue/Trace_y"
+}
