@@ -1,0 +1,13 @@
+{
+  "Name": "PS Poly",
+  "Description": "Polymer image analysis and shape categorization of AFM data",
+  "Authors": "Elizabeth Conley",
+  "Repository": "https://github.com/KingGavinM/PS-Poly",
+  "Homepage": "https://kinggm.mufaculty.umsystem.edu",
+  "Documentation": null,
+  "Download Page": "https://pypi.org/project/pspoly",
+  "Coding Language": "Igor Pro, Python",
+  "License": "CC",
+  "Operating System": null,
+  "Pricing Model": null
+}
