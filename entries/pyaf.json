@@ -1,0 +1,13 @@
+{
+  "Authors": "Michka Popoff, Antoine Dujardin, Javier Lopez-Alonso, Simone Bovio, Nuno Duarte, Sébastien Janel, Vincent Dupres, Frank Lafont",
+  "Coding Language": "Python",
+  "Description": "An AFM Force Curve Analysis Software",
+  "Documentation": null,
+  "Download Page": null,
+  "Homepage": "https://cmpi.cnrs.fr/",
+  "License": "CeCILL 2.1",
+  "Name": "pyAF",
+  "Operating System": null,
+  "Pricing Model": null,
+  "Repository": "https://github.com/sebastienjanel/pyAF"
+}
