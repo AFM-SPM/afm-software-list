@@ -1,5 +1,6 @@
 {
   "Authors": "Paul Müller",
+  "Cite": "https://pyjibe.readthedocs.io/en/stable/sec_getting_started.html#how-to-cite",
   "Coding Language": "Python",
   "Description": "GUI for AFM data analysis with an emphasis on biological specimens",
   "Documentation": "https://pyjibe.readthedocs.io",

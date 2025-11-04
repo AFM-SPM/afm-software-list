@@ -1,5 +1,6 @@
 {
   "Authors": "Paul Müller",
+  "Cite": "https://doi.org/10.1186/s12859-019-3010-3",
   "Coding Language": "Python",
   "Description": "Fitting and machine-learning based rating of AFM force-indentation data",
   "Documentation": "https://nanite.readthedocs.io",

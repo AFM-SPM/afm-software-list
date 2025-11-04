@@ -1,5 +1,6 @@
 {
   "Authors": "Elizabeth Conley",
+  "Cite": null,
   "Coding Language": "Igor Pro, Python",
   "Description": "Polymer image analysis and shape categorization of AFM data",
   "Documentation": null,

@@ -18,6 +18,14 @@ If you would like to add a software to this list, you have two options:
    This will create a new .json file in the ``entries`` directory which
    you can then add to your pull request.
 
+To create a preview of the resulting software list page, run::
+
+    python afm-list-manager.py export-list -o exported
+
+To properly reformat all JSON entries, run::
+
+    python afm-list-manager.py run-maintenance
+
 
 List management
 ---------------

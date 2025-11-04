@@ -1,5 +1,6 @@
 {
   "Authors": "Paul Müller",
+  "Cite": null,
   "Coding Language": "Python",
   "Description": "Python library for reading common AFM file formats",
   "Documentation": "https://afmformats.readthedocs.io",

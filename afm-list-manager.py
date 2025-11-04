@@ -90,7 +90,7 @@ def check_entries():
             data = json.load(fd)
         for item in kwdata:
             name = item["name"]
-            if item["type"] == "url" and data[name] is not None:
+            if item["type"] == "url" and data.get(name) is not None:
                 try:
                     valid = verify_url(data[name])
                 except BaseException:
@@ -277,7 +277,7 @@ def generate_issue_template():
 
 
 def recreate_json_entries():
-    """Rcreate all json entries
+    """Recreate all json entries
 
     This is used for fixing manual formatting errors or when new
     keys are added.
