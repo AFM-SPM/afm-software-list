@@ -7,20 +7,20 @@ assignees: paulmueller
 
 ---
 
-Please replace ``null`` in the following template with quoted values (e.g. ``"Name": "TopoStats",``). Do so only where applicable (e.g. not every software has a Homepage).
+Please fill in the following template. Use ``null`` if an entry does not apply.
 
 ```json
 {
-  "Name": null,
-  "Description": null,
-  "Authors": null,
-  "Repository": null,
+  "Authors": "John Doe",
+  "Coding Language": "Python",
+  "Description": "An example description of the software",
+  "Documentation": "https://readthedocs.io/example",
+  "Download Page": "https://example.com/downloads",
   "Homepage": null,
-  "Documentation": null,
-  "Download Page": null,
-  "Coding Language": null,
-  "License": null,
-  "Operating System": null,
-  "Pricing Model": null
+  "License": "GPL",
+  "Name": "AFM-example-software-name",
+  "Operating System": ["Windows", "macOS"],
+  "Pricing Model": null,
+  "Repository": "https://github.com/example",
 }
 ```
