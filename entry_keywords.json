@@ -1,50 +1,62 @@
 [
   {
-    "name":"Name",
-    "type":"str"
+    "name": "Name",
+    "type": "str",
+    "example": "AFMsoft"
   },
   {
-    "name":"Description",
-    "type":"str"
+    "name": "Description",
+    "type": "str",
+    "example": "An example AFM software description"
   },
   {
-    "name":"Authors",
-    "type":"str"
+    "name": "Authors",
+    "type": "str",
+    "example": "John Doe"
   },
   {
-    "name":"Repository",
-    "type":"url"
+    "name": "Repository",
+    "type": "url",
+    "example": "https://github.com/example"
   },
   {
-    "name":"Homepage",
-    "type":"url"
+    "name": "Homepage",
+    "type": "url",
+    "example": null
   },
   {
-    "name":"Documentation",
-    "type":"url"
+    "name": "Documentation",
+    "type": "url",
+    "example": "https://readthedocs.io/example"
   },
   {
-    "name":"Download Page",
-    "type":"url"
+    "name": "Download Page",
+    "type": "url",
+    "example": "https://example.com/downloads"
   },
   {
-    "name":"Coding Language",
-    "type":"str"
+    "name": "Coding Language",
+    "type": "str",
+    "example": "Python"
   },
   {
-    "name":"License",
-    "type":"str"
+    "name": "License",
+    "type": "str",
+    "example": "GPL"
   },
   {
-    "name":"Operating System",
-    "type":"list"
+    "name": "Operating System",
+    "type": "list",
+    "example": ["Linux", "macOS", "Windows"]
   },
   {
-    "name":"Pricing Model",
-    "type":"str"
+    "name": "Pricing Model",
+    "type": "str",
+    "example": null
   },
   {
-    "name":"Cite",
-    "type":"url"
+    "name": "Cite",
+    "type": "url",
+    "example": "https://dx.doi.org/10.3.4"
   }
 ]

@@ -269,7 +269,7 @@ def generate_issue_template():
         data = json.load(fd)
     template = {}
     for item in data:
-        template[item["name"]] = None
+        template[item["name"]] = item["example"]
     dumped = json.dumps(template, **json_kwargs)
     [lines.append(dd) for dd in dumped.split("\n")]
     lines.append("```")

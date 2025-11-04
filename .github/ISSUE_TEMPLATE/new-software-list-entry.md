@@ -12,15 +12,20 @@ Please fill in the following template. Use ``null`` if an entry does not apply.
 ```json
 {
   "Authors": "John Doe",
+  "Cite": "https://dx.doi.org/10.3.4",
   "Coding Language": "Python",
-  "Description": "An example description of the software",
+  "Description": "An example AFM software",
   "Documentation": "https://readthedocs.io/example",
   "Download Page": "https://example.com/downloads",
   "Homepage": null,
   "License": "GPL",
-  "Name": "AFM-example-software-name",
-  "Operating System": ["Windows", "macOS"],
+  "Name": "AFMsoft",
+  "Operating System": [
+    "Linux",
+    "macOS",
+    "Windows"
+  ],
   "Pricing Model": null,
-  "Repository": "https://github.com/example",
+  "Repository": "https://github.com/example"
 }
 ```
