@@ -42,5 +42,9 @@
   {
     "name":"Pricing Model",
     "type":"str"
+  },
+  {
+    "name":"Cite",
+    "type":"url"
   }
 ]
