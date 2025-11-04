@@ -9,6 +9,13 @@ import requests
 from slugify import slugify
 
 
+json_kwargs = {
+    "sort_keys": True,
+    "indent": 2,
+    "ensure_ascii": False,
+}
+
+
 @click.group()
 def cli():
     pass
@@ -47,7 +54,7 @@ def add_entry():
     if path.exists():
         raise ValueError("Entry already exists: {}".format(fname))
     with path.open("w") as fd:
-        json.dump(entry, fd, sort_keys=True, indent=2, ensure_ascii=False)
+        json.dump(entry, fd, **json_kwargs)
 
 
 @click.command()
@@ -62,7 +69,7 @@ def add_keyword():
     data.append({"name": name,
                  "type": dtype})
     with KEYWORD_FILE.open("w") as fd:
-        json.dump(data, fd, indent=2)
+        json.dump(data, fd, **json_kwargs)
     generate_issue_template()
     recreate_json_entries()
 
@@ -77,6 +84,7 @@ def check_entries():
     errors = []
     files = sorted(ENTRY_DIR.glob("*.json"))
     for path in files:
+        errors_p = []
         print(f"Checking {path.name}...")
         with path.open() as fd:
             data = json.load(fd)
@@ -88,10 +96,18 @@ def check_entries():
                 except BaseException:
                     valid = False
                 if not valid:
-                    errors.append("URL broken for '{}': '{}' ({})".format(
+                    errors_p.append("URL broken for '{}': '{}' ({})".format(
                         path.name, item["name"], data[name]))
-    for err in errors:
-        click.secho(err, bold=True, fg="red", err=True)
+
+        if not errors_p:
+            # rewrite the json file if there were no errors
+            with path.open("w") as fd:
+                json.dump(data, fd, **json_kwargs)
+
+        for err in errors_p:
+            click.secho(err, bold=True, fg="red", err=True)
+
+        errors += errors_p
 
     if errors:
         click.secho("There were errors.", bold=True, fg="red")
@@ -254,7 +270,7 @@ def generate_issue_template():
     template = {}
     for item in data:
         template[item["name"]] = None
-    dumped = json.dumps(template, indent=2)
+    dumped = json.dumps(template, **json_kwargs)
     [lines.append(dd) for dd in dumped.split("\n")]
     lines.append("```")
     tpath.write_text("\n".join(lines))
@@ -280,7 +296,7 @@ def recreate_json_entries():
                 entry[name] = sorted(entry[name])
         # save entry
         with path.open("w") as fd:
-            json.dump(entry, fd, sort_keys=True, indent=2, ensure_ascii=False)
+            json.dump(entry, fd, **json_kwargs)
 
 
 def verify_url(url):
