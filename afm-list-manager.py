@@ -231,8 +231,11 @@ def export_to_html(path, table_id="afmlist-table", tr_class="afmlist-header",
                         icon = '<img src="{}" style="height:1em;">'.format(ip)
                 else:
                     icon = value
-                value = '<a href="{}" title="{} of {}">{}</a>'.format(
-                    value, name, ent["Name"], icon)
+                if name == "Cite":
+                    title = f'Cite {ent["Name"]}'
+                else:
+                    title = f'{ent["Name"]} {name}'
+                value = f'<a href="{value}" title="{title}">{icon}</a>'
             lines.append("<td> {} </td>".format(value))
         lines.append("</tr>")
     lines.append('</table>')
