@@ -1,6 +1,6 @@
 {
   "Authors": "Daniel E. Rollins",
-  "Cite": "Rollins, D. E. (2026). playNano: AFM Video Reader and Analysis Toolkit. https://github.com/derollins/playNano ",
+  "Cite": "https://github.com/derollins/playNano",
   "Coding Language": "Python",
   "Description": "Python toolkit for processing and visualising high-speed AFM (Atomic Force Microscopy) video data.",
   "Documentation": "https://derollins.github.io/playNano/",

@@ -77,7 +77,7 @@ def add_keyword():
 @click.command()
 def check_entries():
     """Perform sanity checks for all list entries"""
-    with KEYWORD_FILE.open() as fd:
+    with KEYWORD_FILE.open(encoding="utf-8") as fd:
         kwdata = json.load(fd)
     click.secho("Checking entries...", bold=True)
     warnings = []
@@ -86,7 +86,7 @@ def check_entries():
     for path in files:
         errors_p = []
         print(f"Checking {path.name}...")
-        with path.open() as fd:
+        with path.open(encoding="utf-8") as fd:
             data = json.load(fd)
         for item in kwdata:
             name = item["name"]
@@ -101,7 +101,7 @@ def check_entries():
 
         if not errors_p:
             # rewrite the json file if there were no errors
-            with path.open("w") as fd:
+            with path.open("w", encoding="utf-8") as fd:
                 json.dump(data, fd, **json_kwargs)
 
         for err in errors_p:
@@ -303,9 +303,39 @@ def recreate_json_entries():
 
 
 def verify_url(url):
-    """Verify that a URL is valid"""
-    request = requests.get(url)
-    return request.status_code == 200
+    """
+    Verify that a URL is valid
+
+    Uses HEAD first for efficiency, falling back to GET if the server returns
+    a blocking status (401, 403, 405, 406, 429). These codes indicate the server
+    and URL exist but are refusing automated requests, so they are treated as
+    valid rather than broken.
+    """
+    headers = {
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/125.0.0.0 Safari/537.36"
+        ),
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.5",
+    }
+    ALIVE_BUT_BLOCKING = {401, 403, 405, 406, 429}
+
+    try:
+        request = requests.head(url, headers=headers, allow_redirects=True, timeout=15)
+        if request.status_code in ALIVE_BUT_BLOCKING:
+            request = requests.get(
+                url,
+                headers=headers,
+                allow_redirects=True,
+                timeout=15,
+                stream=True,
+            )
+            request.close()
+        return request.status_code == 200 or request.status_code in ALIVE_BUT_BLOCKING
+    except requests.RequestException:
+        return False
 
 
 ENTRY_DIR = pathlib.Path(__file__).parent / "entries"
