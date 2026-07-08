@@ -253,7 +253,12 @@ def download_favicon(url, download_dir):
     parsed_uri = urlparse(url)
     domain = '{uri.scheme}://{uri.netloc}/'.format(uri=parsed_uri)
     # get favicon
-    resp = requests.get(domain + "/favicon.ico")
+    with warnings.catch_warnings():
+        warnings.simplefilter(
+            "ignore",
+            category=urllib3.connectionpool.InsecureRequestWarning
+        )
+        resp = requests.get(domain + "/favicon.ico", verify=False)
     if resp.status_code == 200:
         path = download_dir / (parsed_uri.netloc + ".ico")
         with path.open("wb") as fd:
@@ -339,15 +344,16 @@ def verify_url(url):
                                     # Out of scope to check SSL certificates
                                     verify=False,
                                     )
-        if request.status_code in ALIVE_BUT_BLOCKING:
-            request = requests.get(
-                url,
-                headers=headers,
-                allow_redirects=True,
-                timeout=15,
-                stream=True,
-            )
-            request.close()
+            if request.status_code in ALIVE_BUT_BLOCKING:
+                request = requests.get(
+                    url,
+                    headers=headers,
+                    allow_redirects=True,
+                    timeout=15,
+                    stream=True,
+                    verify=False
+                )
+                request.close()
         return request.status_code == 200 or request.status_code in ALIVE_BUT_BLOCKING
     except requests.RequestException:
         return False
