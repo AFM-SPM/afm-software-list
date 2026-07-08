@@ -14,7 +14,7 @@ Please fill in the following template. Use ``null`` if an entry does not apply.
   "Authors": "John Doe",
   "Cite": "https://dx.doi.org/10.3.4",
   "Coding Language": "Python",
-  "Description": "An example AFM software",
+  "Description": "An example AFM software description",
   "Documentation": "https://readthedocs.io/example",
   "Download Page": "https://example.com/downloads",
   "Homepage": null,
