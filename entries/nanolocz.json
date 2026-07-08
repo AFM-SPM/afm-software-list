@@ -9,9 +9,9 @@
   "License": "GPL-3.0",
   "Name": "NanoLocz",
   "Operating System": [
+    "Linux",
     "Windows",
-    "macOS",
-    "Linux"
+    "macOS"
   ],
   "Pricing Model": null,
   "Repository": "https://github.com/George-R-Heath/NanoLocz"

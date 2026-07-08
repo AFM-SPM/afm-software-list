@@ -9,9 +9,9 @@
   "License": "GPL-3.0",
   "Name": "playNano",
   "Operating System": [
+    "Linux",
     "Windows",
-    "macOS",
-    "Linux"
+    "macOS"
   ],
   "Pricing Model": "Free",
   "Repository": "https://github.com/derollins/playNano"
