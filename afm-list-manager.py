@@ -3,6 +3,8 @@ import json
 import pathlib
 import sys
 from urllib.parse import urlparse
+import urllib3
+import warnings
 
 import click
 import requests
@@ -323,7 +325,20 @@ def verify_url(url):
     ALIVE_BUT_BLOCKING = {401, 403, 405, 406, 429}
 
     try:
-        request = requests.head(url, headers=headers, allow_redirects=True, timeout=15)
+        with warnings.catch_warnings():
+            warnings.simplefilter(
+                "ignore",
+                category=urllib3.connectionpool.InsecureRequestWarning
+            )
+            request = requests.head(url,
+                                    headers=headers,
+                                    # DOIs often redirect
+                                    allow_redirects=True,
+                                    # CI systems might need some time
+                                    timeout=15,
+                                    # Out of scope to check SSL certificates
+                                    verify=False,
+                                    )
         if request.status_code in ALIVE_BUT_BLOCKING:
             request = requests.get(
                 url,
