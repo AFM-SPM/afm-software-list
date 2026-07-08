@@ -1,0 +1,18 @@
+{
+  "Authors": "Daniel E. Rollins",
+  "Cite": "https://github.com/derollins/playNano",
+  "Coding Language": "Python",
+  "Description": "Python toolkit for processing and visualising high-speed AFM (Atomic Force Microscopy) video data.",
+  "Documentation": "https://derollins.github.io/playNano/",
+  "Download Page": "https://github.com/derollins/playNano/releases",
+  "Homepage": "https://github.com/derollins/playNano",
+  "License": "GPL-3.0",
+  "Name": "playNano",
+  "Operating System": [
+    "Windows",
+    "macOS",
+    "Linux"
+  ],
+  "Pricing Model": "Free",
+  "Repository": "https://github.com/derollins/playNano"
+}

@@ -1,0 +1,18 @@
+{
+  "Authors": "George Heath, Emily Micklethwaite, Tabitha Storer",
+  "Cite": "https://doi.org/10.1002/smtd.202301766",
+  "Coding Language": "Matlab",
+  "Description": "An interactive AFM image viewer and analysis platform designed for browsing and analysing image data from AFM and HS-AFM imaging with the aim of increasing throughput.",
+  "Documentation": "https://george-r-heath.github.io/NanoLocz/docs/",
+  "Download Page": "https://github.com/George-R-Heath/NanoLocz/releases/",
+  "Homepage": null,
+  "License": "GPL-3.0",
+  "Name": "NanoLocz",
+  "Operating System": [
+    "Windows",
+    "macOS",
+    "Linux"
+  ],
+  "Pricing Model": null,
+  "Repository": "https://github.com/George-R-Heath/NanoLocz"
+}
